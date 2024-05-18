@@ -10,24 +10,29 @@
   </head>
   <body>
     <div class="container">
-      <div class="bg-animation">
+      <!--<div class="bg-animation">
         <div id="stars"></div>
         <div id="stars-2"></div>
         <div id="stars-3"></div>
-      </div>
+      </div>-->
       <nav>
         <h1>Sky Scope</h1>
         <h3 class="changing-heading">Find <span class="switch-body Stars">Stars</span></h3>
       </nav>
       <section id="searching-box">
-        <input type="search" placeholder="Search over 100+ celestial bodies: planets, moons, satellites, etc..."/>
-        <button><i class="fa-solid fa-magnifying-glass"></i></button>
+        <input id="search-input" type="text" placeholder="Search over 100+ celestial bodies: planets, moons, satellites, etc..." aria-label="Search">
+        <button id="search-button"><i class="fa-solid fa-magnifying-glass"></i></button>
       </section>
       <section class="cards-container">
         <div class="cards">
 
         </div>
       </section>
+    </div>
+    <div class="bg-animation">
+      <div id="stars"></div>
+      <div id="stars-2"></div>
+      <div id="stars-3"></div>
     </div>
   </body>
 </html>

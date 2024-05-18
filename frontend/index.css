@@ -85,11 +85,12 @@ nav .changing-heading {
   min-width: 44rem;
   justify-content: center;
   align-items: center;
+  z-index: 1000;
 }
 
 #searching-box button {
   border-top-right-radius: 2.5rem;
-  height: 3rem;
+  height: 4rem;
   border-bottom-right-radius: 2.5rem;
   border: none;
   width: 3rem;
