@@ -101,3 +101,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
     trackers[i].addEventListener("click", getPosition);
   }
 });
+
+
+
