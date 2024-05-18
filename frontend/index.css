@@ -110,15 +110,27 @@ nav .changing-heading {
 }
 
 .card {
-  border: 0.1rem solid white;
+  border: 0.05rem solid white;
   min-width: 16rem;
-  border-radius: 0.2rem;
+  border-radius: 30px;
   padding: 1em;
   margin: 1em;
   flex: 0 0 auto;
   display: flex;
   flex-direction: column;
 
+}
+
+.card p {
+  font-size: 1.3rem;
+  font-weight: 200;
+  font-family:  sans-serif;
+}
+
+.card img {
+  min-height: 16rem;
+  max-width: 16rem;
+  text-align: center;
 }
 
 
@@ -128,15 +140,15 @@ nav .changing-heading {
     position: absolute;
     display: flex;
     flex-direction: column;
-    transform: translate(30%, 50%);
+    transform: translate(70%, 80%);
     -ms-transform: translate(50%, -50%);
     opacity: 0;
   }
 
   .overlay button:first-of-type {
     cursor: pointer;
-    border-radius: 0.25rem;
     border: none;
+    border-radius: 0.25rem;
     padding: 0.5rem;
     font-size: 1rem;
     font-weight: 600;

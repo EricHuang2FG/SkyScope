@@ -42,7 +42,7 @@ function createCard(name, imagePath) {
 createCard("The Sun", "./media/sun.jpeg");
 createCard("The Moon", "./media/moon.jpeg");
 createCard("ISS (ZARYA)", "./media/iss.jpeg");
-createCard("CSS (TIANHE)", "./media/css.jpg");
+createCard("CSS (TIANHE)", "./media/css.png");
 createCard("Mercury", "./media/mercury.jpeg");
 createCard("Venus", "./media/venus.jpeg");
 createCard("Mars", "./media/mars.jpeg");
