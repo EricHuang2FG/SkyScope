@@ -79,7 +79,7 @@ function sendPositionToBackend(target, longitude, latitude, elevation) {
     headers: {
       "Content-Type": "applications/json"
     },
-    body: JSON.stringify(data);
+    body: JSON.stringify(data)
   }) 
     .then(response => {
       if (!response.ok) {
