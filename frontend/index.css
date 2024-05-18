@@ -65,17 +65,9 @@ nav .changing-heading {
 }
 
 #searching-box input {
-  /*width: 85%;
-  padding: 0.625rem;
-  font-size: 1em;
-  margin: 1.2em 0.8em;
-  border: 2px solid #fff;
-  border-radius: 0.313rem;
-  background-color: #222;
-  color: #fff;*/
-  height: 1.8rem;
+  height: 2.8rem;
   width: 85%;
-  padding: 1rem;
+  padding: 0.5rem 1rem;
   margin: 1.2em 0.8em;
   border-top-left-radius: 2.5rem;
   border-bottom-left-radius: 2.5rem;
@@ -90,11 +82,19 @@ nav .changing-heading {
 #searching-box {
   display: flex;
   align-items: center;
-  justify-content: center;
   min-width: 44rem;
 }
 
 #searching-box button {
+  border-top-right-radius: 2.5rem;
+  border-bottom-right-radius: 2.5rem;
+  padding: 0.8rem 0rem 0.8rem 0rem;
+  border: none;
+  width: 3rem;
+  font-size: 1.2rem;
+  cursor: pointer;
+  background-color: #3b3b3b;
+  color: #fff;
   
 }
 
