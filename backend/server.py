@@ -17,8 +17,9 @@ def receive_info():
     target = data["target"]
     latitude = data["latitude"]
     longitude = data["longitude"]
+    elevation = data["elevation"]
     util.get_file()
-    send_data(target, longitude, latitude)
+    send_data(target, longitude, latitude, elevation)
     
 def send_data(target, longitude, latitude, elevation):
     horizontal_angle, vertical_angle = util.calculate(target, longitude, latitude, elevation)

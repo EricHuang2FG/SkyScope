@@ -7,7 +7,7 @@ function handleOrientation(event) {
   console.log(absolute);
   console.log(alpha);
   console.log(beta);
-  console.log(gamma);
+  console.log(gamma); 
 }
 
-window.addEventListener("deviceorientation", handleOrientation, true);
+window.addEventListener("deviceorientationabsolute", handleOrientation, true);
