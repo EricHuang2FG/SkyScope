@@ -52,7 +52,7 @@ nav .changing-heading {
   font-family: 'Montserrat', sans-serif;
 }
 
-.switch-body.Comets {
+.switch-body.Space {
   color: lightblue;
   font-family: 'Alegreya Sans SC', sans-serif;
 }
@@ -99,8 +99,6 @@ nav .changing-heading {
   cursor: pointer;
   background-color: #3b3b3b;
   color: #fff;
-
-  
 }
 
 .cards {
@@ -115,7 +113,7 @@ nav .changing-heading {
   border: 0.05rem solid white;
   min-width: 16rem;
   border-radius: 30px;
-  padding: 1em;
+  padding: 1.2em;
   margin: 1em;
   flex: 0 0 auto;
   display: flex;
