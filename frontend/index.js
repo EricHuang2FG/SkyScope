@@ -39,18 +39,22 @@ function createCard(name, imagePath) {
   cardsElement.appendChild(card);
 }
 
-createCard("ISS (ZARYA)", "./media/iss.jpeg");
-createCard("ISS (NAUKA)", "./media/iss_nauka.webp");
-createCard("CSS (TIANHE)", "./media/css.png");
-createCard("Mercury", "./media/mercury.jpeg");
-createCard("Venus", "./media/venus.jpeg");
-createCard("Mars", "./media/mars.jpeg");
-createCard("Jupiter", "./media/jupiter.jpeg");
-createCard("Saturn", "./media/saturn.jpeg");
-createCard("Uranus", "./media/uranus.jpeg");
-createCard("Neptune", "./media/neptune.jpeg");
-createCard("Pluto", "./media/pluto.jpeg");
-createCard("The Moon", "./media/moon.jpeg");
+const cards = [
+  {name: "ISS (ZARYA)", image: "./media/iss.jpeg"},
+  {name: "ISS (NAUKA)", image: "./media/iss_nauka.webp"},
+  {name: "CSS (TIANHE)", image: "./media/css.png"},
+  {name: "Mercury", image: "./media/mercury.jpeg"},
+  {name: "Venus", image: "./media/venus.jpeg"},
+  {name: "Mars", image: "./media/mars.jpeg"},
+  {name: "Jupiter", image: "./media/jupiter.jpeg"},
+  {name: "Saturn", image: "./media/saturn.jpeg"},
+  {name: "Uranus", image: "./media/uranus.jpeg"},
+  {name: "Neptune", image: "./media/neptune.jpeg"},
+  {name: "Pluto", image: "./media/pluto.jpeg"},
+  {name: "The Moon", image: "./media/moon.jpeg"}
+];
+
+cards.forEach(card => createCard(card.name, card.image));
 
 function getPosition() {
   return new Promise((resolve, reject) => {
@@ -77,7 +81,7 @@ function sendPositionToBackend(target, longitude, latitude, elevation) {
     "elevation": elevation
   };
 
-  fetch("http://localhost:8080/skyscope", {
+  fetch("http://localhost:9001/skyscope", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
