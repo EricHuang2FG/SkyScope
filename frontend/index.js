@@ -39,8 +39,8 @@ function createCard(name, imagePath) {
   cardsElement.appendChild(card);
 }
 
-createCard("The Sun", "./media/sun.jpeg");
-createCard("The Moon", "./media/moon.jpeg");
+createCard("Sun", "./media/sun.jpeg");
+createCard("Moon", "./media/moon.jpeg");
 createCard("ISS (ZARYA)", "./media/iss.jpeg");
 createCard("CSS (TIANHE)", "./media/css.png");
 createCard("Mercury", "./media/mercury.jpeg");
