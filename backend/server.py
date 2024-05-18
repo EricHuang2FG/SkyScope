@@ -3,7 +3,6 @@ from flask_cors import CORS
 from serial_communicate import send_angle_to_mc
 import get_target_position as util
 
-
 app = Flask(__name__)
 CORS(app)
 
@@ -12,7 +11,7 @@ def receive_info():
     data = request.get_json()
     if not data:
         print("Nothing received for the data, exiting...")
-        return jsonify({"error": "An oopsie occurred"}), 400
+        return jsonify({"error": "An oopsie occurred, no gyatt for you"}), 400
 
     print("wallahi this works :)")
     target = data["target"]
