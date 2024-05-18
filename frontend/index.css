@@ -67,7 +67,7 @@ nav .changing-heading {
 
 #searching-box input {
   height: 2.8rem;
-  width: 85%;
+  min-width: 85%;
   padding: 0.5rem 1rem;
   margin: 1.2em 0em;
   border-top-left-radius: 2.5rem;
@@ -181,6 +181,12 @@ nav .changing-heading {
 
   .card:hover .overlay {
     opacity: 1;
+  }
+
+  @media only screen and (min-width: 0px) and (max-width: 663px) {
+    #searching-box input {
+      min-width: 20rem;
+    }
   }
 
 /* stars animation */
