@@ -7,7 +7,7 @@ import get_target_position as util
 app = Flask(__name__)
 CORS(app)
 
-@app.route("/localhost:8080", methods=["POST"])
+@app.route("/skyscope", methods=["POST"])
 def receive_info():
     data = request.get_json()
     if not data:
@@ -19,11 +19,14 @@ def receive_info():
     latitude = data["latitude"]
     longitude = data["longitude"]
 
-def send_data(target, long, lat):
+    send_data("moon", 43.475, -80.529, 338)
+    send_data(target, longitude, latitude)
+    
+def send_data(target, longitude, latitude, elevation):
     util.get_file()
-    horizontal_angle, vertical_angle = util.calculate(lat, long, __elevation__, target)
+    horizontal_angle, vertical_angle = util.calculate(target, longitude, latitude, elevation)
     send_angle_to_mc(horizontal_angle, vertical_angle)
     util.remove_file()
 
 
-app.run(debug=True)
+app.run(debug=True, port=8080)
