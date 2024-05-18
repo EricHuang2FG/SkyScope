@@ -1,46 +1,50 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="index.css"/>
+    <title>Sky Scope</title>
+    <!--Font awesome icons-->
+    <script defer src="https://kit.fontawesome.com/f8aab6c270.js" crossorigin="anonymous"></script>
   </head>
   <body>
-    <nav>
-      <h1>Sky Scope</h1>
-      <h3 class="changing-heading">Find <span class="switch-body Stars">Stars</span></h3>
-    </nav>
-    <section id="searching-box">
-      <input type="search"/>
-      <button>Search</button>
-    </section>
-    <section class="cards recent-searches">
-      <div class="card">
-        <p>Jupiter</p>
-        <img src="assets/jupiter"/>
-        <button>Track</button>
-        <button>Description</button>
-      </div>
-      <div class="card">
-        <p>Jupiter</p>
-        <img src="assets/jupiter"/>
-        <button>Track</button>
-        <button>Description</button>
-      </div>
-      <div class="card">
-        <p>Jupiter</p>
-        <img src="assets/jupiter"/>
-        <button>Track</button>
-        <button>Description</button>
-      </div>
-      <div class="card">
-        <p>Jupiter</p>
-        <img src="assets/jupiter"/>
-        <button>Track</button>
-        <button>Description</button>
-      </div>
-    </section>
-    <section class="cards random-searches">
-
-    </section>
+    <div class="container">
+      <nav>
+        <h1>Sky Scope</h1>
+        <h3 class="changing-heading">Find <span class="switch-body Stars">Stars</span></h3>
+      </nav>
+      <section id="searching-box">
+        <input type="search" placeholder="Search over 100+ celestial bodies: planets, moons, satellites, etc..."/>
+        <button><i class="fa-solid fa-magnifying-glass"></i></button>
+      </section>
+      <section class="cards">
+        <div class="card">
+          <p>Jupiter</p>
+          <img src="assets/jupiter"/>
+          <button>Track</button>
+          <button>Description</button>
+        </div>
+        <div class="card">
+          <p>Jupiter</p>
+          <img src="assets/jupiter"/>
+          <button>Track</button>
+          <button>Description</button>
+        </div>
+        <div class="card">
+          <p>Jupiter</p>
+          <img src="assets/jupiter"/>
+          <button>Track</button>
+          <button>Description</button>
+        </div>
+        <div class="card">
+          <p>Jupiter</p>
+          <img src="assets/jupiter"/>
+          <button>Track</button>
+          <button>Description</button>
+        </div>
+      </section>
+    </div>
     <!-- <div class="bg-animation">
       <div id="stars"></div>
       <div id="stars-2"></div>
