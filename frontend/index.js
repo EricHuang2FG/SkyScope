@@ -15,27 +15,44 @@ function createCard(name, imagePath) {
   let card = document.createElement("div");
   let pElement = document.createElement("p");
   let imgElement = document.createElement("img");
+  let overlayDiv = document.createElement("div");
   let buttonTrack = document.createElement("button");
   let buttonDescription = document.createElement("button");
 
+  buttonTrack.textContent = "Track";
+  buttonDescription.textContent = "Description";
+
   card.classList.add("card");
   pElement.textContent = name;
-  imgElement.src = `assets/${imagePath}`;
+  imgElement.src = `${imagePath}`;
   buttonTrack.classList.add("track");
-  buttonTrack.textContent = "Track"; 
-  buttonDescription.classList.add("description");
-  buttonDescription.textContent = "Description"; 
+  buttonTrack.classList.add("description");
+  overlayDiv.classList.add("overlay");
 
-  card.appendChild(pElement);
   card.appendChild(imgElement);
-  card.appendChild(buttonTrack);
-  card.appendChild(buttonDescription);
+  card.appendChild(pElement);
+  overlayDiv.appendChild(buttonTrack);
+  overlayDiv.appendChild(buttonDescription);
+  card.appendChild(overlayDiv);
   console.log("Hello");
 
   cardsElement.appendChild(card);
 }
 
-createCard("Jupiter", "jupiter.jpg");
+createCard("The Sun", "./media/sun.jpeg");
+createCard("The Moon", "./media/moon.jpeg");
+createCard("ISS (ZARYA)", "./media/iss.jpeg");
+createCard("CSS (TIANHE)", "./media/css.jpg");
+createCard("Mercury", "./media/mercury.jpeg");
+createCard("Venus", "./media/venus.jpeg");
+createCard("Mars", "./media/mars.jpeg");
+createCard("Jupiter", "./media/jupiter.jpeg");
+createCard("Saturn", "./media/saturn.jpeg");
+createCard("Uranus", "./media/uranus.jpeg");
+createCard("Neptune", "./media/neptune.jpeg");
+createCard("Pluto", "./media/pluto.jpeg");
+
+let trackers = document.getElementsByClassName("tracker");
 
 function getPosition(event) {
   navigator.geolocation.getCurrentPosition(
