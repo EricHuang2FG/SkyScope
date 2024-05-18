@@ -15,19 +15,25 @@ function createCard(name, imagePath) {
   let card = document.createElement("div");
   let pElement = document.createElement("p");
   let imgElement = document.createElement("img");
+  let overlayDiv = document.createElement("div");
   let buttonTrack = document.createElement("button");
   let buttonDescription = document.createElement("button");
+
+  buttonTrack.textContent = "Track";
+  buttonDescription.textContent = "Description";
 
   card.classList.add("card");
   pElement.textContent = name;
   imgElement.src = `assets/${imagePath}`;
-  buttonTrack.classList.add("track")
-  buttonTrack.classList.add("description")
+  buttonTrack.classList.add("track");
+  buttonTrack.classList.add("description");
+  overlayDiv.classList.add("overlay");
 
-  card.appendChild(pElement);
   card.appendChild(imgElement);
-  card.appendChild(buttonTrack);
-  card.appendChild(buttonDescription);
+  card.appendChild(pElement);
+  overlayDiv.appendChild(buttonTrack);
+  overlayDiv.appendChild(buttonDescription);
+  card.appendChild(overlayDiv);
   console.log("Hello");
 
   cardsElement.appendChild(card);
