@@ -18,15 +18,12 @@ def receive_info():
     target = data["target"]
     latitude = data["latitude"]
     longitude = data["longitude"]
-
-    send_data("moon", 43.475, -80.529, 338)
+    util.get_file()
+    # send_data("moon", 43.475, -80.529, 338)
     send_data(target, longitude, latitude)
     
 def send_data(target, longitude, latitude, elevation):
-    util.get_file()
     horizontal_angle, vertical_angle = util.calculate(target, longitude, latitude, elevation)
     send_angle_to_mc(horizontal_angle, vertical_angle)
-    util.remove_file()
-
 
 app.run(debug=True, port=8080)
