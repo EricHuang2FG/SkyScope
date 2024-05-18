@@ -1,4 +1,4 @@
-const choices = ['Comets', 'Planets', 'Even more!', 'Stars'];
+const choices = ['Space Stations', 'Planets', 'Even more!', 'Stars'];
 let cardsElement = document.querySelector(".cards");
 let index = 0;
 
