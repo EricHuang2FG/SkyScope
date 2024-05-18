@@ -24,4 +24,4 @@ def send_data(target, longitude, latitude, elevation):
     horizontal_angle, vertical_angle = util.calculate(target, longitude, latitude, elevation)
     send_angle_to_mc(horizontal_angle, vertical_angle)
 
-app.run(host = '0.0.0.0', port = 8080)
+app.run(port = 8080)
