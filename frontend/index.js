@@ -55,11 +55,43 @@ createCard("Pluto", "./media/pluto.jpeg");
 let trackers = document.getElementsByClassName("tracker");
 
 function getPosition(event) {
-  let position = navigator.geolocation.getCurrentPosition;
-  console.log("Latitude", position.coords.latitude);
-  console.log("Longitude", position.coords.longitude);
+  navigator.geolocation.getCurrentPosition(
+    (position) => {
+      console.log("Latitude:", position.coords.latitude);
+      console.log("Longitude:", position.coords.longitude);
+    },
+    (error) => {
+      console.error("Error getting position:", error);
+    }
+  );
 }
 
-for (let i=0; i<trackers.length; ++i) {
-  trackers[i].addEventListener("click", event => getPosition(event));
+function sendPositionToBackend(target, longitude, latitude, elevation) {
+  let data = {
+    "target": target,
+    "longitude": longitude,
+    "latitude": latitude,
+    "elevation": elevation
+  };
+
+  fetch("localhost:8080/skyscope", {
+    method: "POST",
+    headers: {
+      "Content-Type": "applications/json"
+    },
+    body: JSON.stringify(data);
+  }) 
+    .then(response => {
+      if (!response.ok) {
+        throw new Error("network error saar");
+      }
+      return response.json();
+    })
 }
+
+document.addEventListener('DOMContentLoaded', (event) => {
+  let trackers = document.getElementsByClassName("track");
+  for (let i = 0; i < trackers.length; ++i) {
+    trackers[i].addEventListener("click", getPosition);
+  }
+});
