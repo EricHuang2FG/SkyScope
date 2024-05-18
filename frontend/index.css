@@ -16,7 +16,8 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
+  padding-top: 3rem;
 }
 
 nav {
@@ -68,7 +69,7 @@ nav .changing-heading {
   height: 2.8rem;
   width: 85%;
   padding: 0.5rem 1rem;
-  margin: 1.2em 0.8em;
+  margin: 1.2em 0em;
   border-top-left-radius: 2.5rem;
   border-bottom-left-radius: 2.5rem;
   border: none;
@@ -81,20 +82,22 @@ nav .changing-heading {
 
 #searching-box {
   display: flex;
-  align-items: center;
   min-width: 44rem;
+  justify-content: center;
+  align-items: center;
 }
 
 #searching-box button {
   border-top-right-radius: 2.5rem;
+  height: 3rem;
   border-bottom-right-radius: 2.5rem;
-  padding: 0.8rem 0rem 0.8rem 0rem;
   border: none;
   width: 3rem;
   font-size: 1.2rem;
   cursor: pointer;
   background-color: #3b3b3b;
   color: #fff;
+
   
 }
 
