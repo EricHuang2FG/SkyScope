@@ -9,7 +9,6 @@ def get_file():
     global sat_name
     sat_name = {sat.name: sat for sat in all_sat}
 
-
 def calculate(lat, long, elevation, target) -> tuple:
     time_now = load.timescale().now()
     user_pos = wgs84.latlon(lat, long, elevation_m = elevation)
@@ -18,7 +17,6 @@ def calculate(lat, long, elevation, target) -> tuple:
     horizontal_angle = sat_location[0].degrees
     vertical_angle = sat_location[1].degrees
     return (horizontal_angle, vertical_angle)
-
 
 def remove_file():
     if os.path.exists("stations.txt"):
