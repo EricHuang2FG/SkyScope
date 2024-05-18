@@ -26,7 +26,7 @@ function createCard(name, imagePath) {
   pElement.textContent = name;
   imgElement.src = `${imagePath}`;
   buttonTrack.classList.add("track");
-  buttonTrack.classList.add("description");
+  buttonDescription.classList.add("description"); 
   overlayDiv.classList.add("overlay");
 
   card.appendChild(imgElement);
@@ -52,7 +52,7 @@ createCard("Uranus", "./media/uranus.jpeg");
 createCard("Neptune", "./media/neptune.jpeg");
 createCard("Pluto", "./media/pluto.jpeg");
 
-let trackers = document.getElementsByClassName("tracker");
+let trackers = document.getElementsByClassName("track"); 
 
 function getPosition(event) {
   navigator.geolocation.getCurrentPosition(
@@ -74,19 +74,25 @@ function sendPositionToBackend(target, longitude, latitude, elevation) {
     "elevation": elevation
   };
 
-  fetch("localhost:8080/skyscope", {
+  fetch("http://localhost:8080/skyscope", {
     method: "POST",
     headers: {
-      "Content-Type": "applications/json"
+      "Content-Type": "application/json", 
     },
-    body: JSON.stringify(data);
-  }) 
+    body: JSON.stringify(data) 
+  })
     .then(response => {
       if (!response.ok) {
         throw new Error("network error saar");
       }
       return response.json();
     })
+    .then(data => {
+      console.log(data);
+    })
+    .catch(error => {
+      console.error("Error:", error);
+    });
 }
 
 document.addEventListener('DOMContentLoaded', (event) => {
