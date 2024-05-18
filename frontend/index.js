@@ -28,6 +28,21 @@ function createCard(name, imagePath) {
   card.appendChild(imgElement);
   card.appendChild(buttonTrack);
   card.appendChild(buttonDescription);
+  console.log("Hello");
 
-  return card;
+  cardsElement.appendChild(card);
+}
+
+createCard("Jupiter", "jupiter.jpg");
+
+let trackers = document.getElementsByClassName("tracker");
+
+function getPosition(event) {
+  let position = navigator.geolocation.getCurrentPosition;
+  console.log("Latitude", position.coords.latitude);
+  console.log("Longitude", position.coords.longitude);
+}
+
+for (let i=0; i<trackers.length; ++i) {
+  trackers[i].addEventListener("click", event => getPosition(event));
 }
