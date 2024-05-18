@@ -22,7 +22,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding-bottom: 3rem;
+    padding-bottom: 2rem;
   }
 
   /* Navbar */
@@ -105,9 +105,9 @@
   }
 
   section h2 {
-    width: 60vw;
-    font-size: 2rem;
-    font-weight: 700;
+    width: 48vw;
+    font-size: 2.2rem;
+    font-weight: 550;
   }
 
   /* cards-section */
@@ -121,8 +121,8 @@
 
   .card {
     background-color: var(--text);
-    width: 16.5rem;
-    height: 16.5rem;
+    width: 13rem;
+    height: 13rem;
     display: flex;
     flex-direction: column;
     border-radius: 0.45rem;
@@ -135,6 +135,9 @@
     height: 85%;
     border-top-left-radius: 0.45rem;
     border-top-right-radius: 0.45rem;
+    opacity: 1;
+    display: block;
+    transition: .5s ease;
 
   }
 
@@ -142,7 +145,52 @@
     color: var(--bg-color-primary);
     font-size: 1.5rem;
     font-weight: 500;
-    padding: 0.45rem;
+    padding: 0.65rem;
   }
+
+  /* card hover overlay */
+  .overlay {
+    transition: .5s ease;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    transform: translate(60%, 50%);
+    -ms-transform: translate(50%, -50%);
+    opacity: 0;
+  }
+
+  .overlay button:first-of-type {
+    cursor: pointer;
+    border-radius: 0.25rem;
+    border: none;
+    padding: 0.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+  }
+
+  .overlay button:last-of-type {
+    margin-top: 1rem;
+    cursor: pointer;
+    border-radius: 0.25rem;
+    border: none;
+    padding: 0.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+  }
+
+  .card:hover image {
+    opactiy: 0.3;
+  }
+
+  .card:hover .overlay {
+    opacity: 1;
+  }
+
+  .overlay button:hover {
+    background-color: var(--titles);
+    color: var(--text);
+    transition: 0.3s ease;
+  }
+
 
 
