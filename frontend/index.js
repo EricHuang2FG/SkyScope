@@ -6,12 +6,8 @@ const searchButton = document.getElementById("search-button");
 let input;
 searchInput.value = "";
 
-const available_names = ["Sun", "The Sun", "Moon", "Mercury", "Venus", "Mars", "Jupiter", "Saturn", "Uranus", "Neptune", "Pluto", "ISS", "International Space Station", "Zarya", "CSS", "Tinahe"];
+const available_names = ["Moon", "Mercury", "Venus", "Mars", "Jupiter", "Saturn", "Uranus", "Neptune", "Pluto", "ISS", "International Space Station", "Zarya", "CSS", "Tinahe"];
 const available_objects = [
-  {
-  names: ["Sun", "The Sun"],
-  image: "./media/sun.jpeg"
-  },
   {
     names: ["Moon"],
     image: "./media/moon.jpeg"
@@ -161,8 +157,8 @@ function sendPositionToBackend(target, longitude, latitude, elevation) {
 }
 
 document.addEventListener('DOMContentLoaded', (event) => {
-  let trackers = document.getElementsByClassName("track");
   createDefaultCards();
+  let trackers = document.getElementsByClassName("track");
   for (let i = 0; i < trackers.length; ++i) {
     trackers[i].addEventListener("click", getPosition);
   }
@@ -171,7 +167,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 /*  search */
 
 function isObjectFound(name) {
-  for(let i = 0; i < available_objects.length; i++) {
+  for(let i = 0; i < available_names.length; i++) {
     if(available_names[i].toLocaleLowerCase() == name.toLowerCase())
     {
       return true;
@@ -187,6 +183,7 @@ searchInput.addEventListener('input', (e) => {
   }
   else
   {
+    cardsElement.innerHTML = '';
     createDefaultCards();
   }
 
@@ -221,6 +218,7 @@ searchButton.addEventListener('click', (e) => {
     cardsElement.innerHTML = '';
     const objectNotFound = document.createElement('h3');
     objectNotFound.textContent = "Object Not Found. Please try again later."
+    objectNotFound.classList.add("not-found-text");
     cardsElement.appendChild(objectNotFound);
   }
 })
