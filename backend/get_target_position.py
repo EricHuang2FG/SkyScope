@@ -12,7 +12,7 @@ def get_file():
     global planets
     planets = load('de421.bsp')
 
-def calculate(lat, long, elevation, target) -> tuple:
+def calculate(target, lat, long, elevation) -> tuple:
     time_now = load.timescale().now()
     user_pos = wgs84.latlon(lat, long, elevation_m = elevation)
     if target == "ISS (ZARYA)" or target == "CSS (TIANHE)":

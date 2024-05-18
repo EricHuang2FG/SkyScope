@@ -10,17 +10,13 @@ CORS(app)
 @app.route("/skyscope", methods=["POST"])
 def receive_info():
     data = request.get_json()
-    if not data:
+    if  len(data) == 0:
         print("Nothing received for the data, exiting...")
         return jsonify({"error": "An oopsie occurred, no gyatt for you"}), 400
 
-    print("wallahi this works :)")
-    target = data["target"]
-    latitude = data["latitude"]
-    longitude = data["longitude"]
-    elevation = data["elevation"]
+    target = data["target"], latitude = data["latitude"], longitude = data["longitude"], elevation = data["elevation"]
     util.get_file()
-    send_data(target, longitude, latitude, elevation)
+    print(util.calculate(latitude, longitude, elevation, target))
     
 def send_data(target, longitude, latitude, elevation):
     while True:
@@ -32,4 +28,4 @@ def send_data(target, longitude, latitude, elevation):
         if (difference > 0):
             time.sleep(difference)
 
-app.run(port = 8080)
+app.run(debug=True, port=9001)
