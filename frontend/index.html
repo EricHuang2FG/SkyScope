@@ -1,14 +1,51 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sky Scope</title>
-    <!--Font awesome icons-->
-    <script defer src="https://kit.fontawesome.com/f8aab6c270.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="index.css"/>
   </head>
   <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
+    <nav>
+      <h1>Sky Scope</h1>
+      <h3 class="changing-heading">Find <span class="switch-body Stars">Stars</span></h3>
+    </nav>
+    <section id="searching-box">
+      <input type="search"/>
+      <button>Search</button>
+    </section>
+    <section class="cards recent-searches">
+      <div class="card">
+        <p>Jupiter</p>
+        <img src="assets/jupiter"/>
+        <button>Track</button>
+        <button>Description</button>
+      </div>
+      <div class="card">
+        <p>Jupiter</p>
+        <img src="assets/jupiter"/>
+        <button>Track</button>
+        <button>Description</button>
+      </div>
+      <div class="card">
+        <p>Jupiter</p>
+        <img src="assets/jupiter"/>
+        <button>Track</button>
+        <button>Description</button>
+      </div>
+      <div class="card">
+        <p>Jupiter</p>
+        <img src="assets/jupiter"/>
+        <button>Track</button>
+        <button>Description</button>
+      </div>
+    </section>
+    <section class="cards random-searches">
+
+    </section>
+    <!-- <div class="bg-animation">
+      <div id="stars"></div>
+      <div id="stars-2"></div>
+      <div id="stars-3"></div>
+    </div> -->
+    <script src="index.js"></script>
   </body>
 </html>
