@@ -1,4 +1,5 @@
 @import url(reset.css);
+@import url(animation.css);
 
 :root {
     font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
@@ -15,6 +16,13 @@
     color: var(--text);
     margin: 0rem;
     padding: 0rem;
+  }
+
+  .container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-bottom: 3rem;
   }
 
   /* Navbar */
@@ -79,4 +87,62 @@
     color: var(--text);
   }
   
+  /* section */
+
+  section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  section h2:first-of-type{
+    margin-bottom: 0.85rem;
+  }
+
+  section h2:last-of-type {
+    margin-top: 2rem;
+    margin-bottom: 0.85rem;
+  }
+
+  section h2 {
+    width: 60vw;
+    font-size: 2rem;
+    font-weight: 700;
+  }
+
+  /* cards-section */
+
+  .cards-section {
+    display: flex;
+    justify-content: space-evenly;
+  }
+
+  /* card */
+
+  .card {
+    background-color: var(--text);
+    width: 16.5rem;
+    height: 16.5rem;
+    display: flex;
+    flex-direction: column;
+    border-radius: 0.45rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+  }
+
+  .card img {
+    width: 100%;
+    height: 85%;
+    border-top-left-radius: 0.45rem;
+    border-top-right-radius: 0.45rem;
+
+  }
+
+  .card h3 {
+    color: var(--bg-color-primary);
+    font-size: 1.5rem;
+    font-weight: 500;
+    padding: 0.45rem;
+  }
+
 

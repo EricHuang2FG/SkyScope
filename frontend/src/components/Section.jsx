@@ -1,14 +1,18 @@
 import { useState, useEffect } from 'react'
 import Card from './Card'
 
-function Section({title, data}) {
+function Section({title, celestialBodies}) {
+
     return(
-        <div className="section">
+        <section className="section">
             <h2>{title}</h2>
             <div className="cards-section">
+                {celestialBodies.map((body) => {
+                    return <Card celestialBody={body}/>
+                })}
             </div>
-        </div>
+        </section>
     )
 }
 
-export default Card
+export default Section

@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react'
 
-function Card() {
+function Card({ celestialBody }) {
     return(
-        <div>
-            
+        <div className="card">
+            <img src={celestialBody.image} />
+            <h3>{celestialBody.name}</h3>
         </div>
     )
 }
