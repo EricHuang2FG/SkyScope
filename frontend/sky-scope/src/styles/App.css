@@ -1,1 +1,82 @@
 @import url(reset.css);
+
+:root {
+    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+    --nav:  #3b3b3b;
+    --bg-color-primary:  #161616;
+    --titles: #848484;
+    --text: #ffffff;
+    --card: #202020;
+    --button: #bcccdc;
+  }
+  
+  #root, html {
+    background-color: var(--bg-color-primary);
+    color: var(--text);
+    margin: 0rem;
+    padding: 0rem;
+  }
+
+  /* Navbar */
+
+  .nav-bar {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 3rem;
+    padding-bottom: 1rem;
+  }
+
+  .nav-bar h1 {
+    font-family:'Courier New', Courier, monospace;
+    font-weight: 700;
+    font-size: 4rem;
+    padding: 1rem 1rem 3rem 1rem;
+  }
+
+  .search-bar {
+    display: flex;
+    
+  }
+
+  .search-bar input {
+    width: 50vw;
+    height: 1.8rem;
+    border-top-left-radius: 2.5rem;
+    border-bottom-left-radius: 2.5rem;
+    border: none;
+    padding: 0.25rem 1rem;
+    color: var(--titles);
+    background-color: var(--nav);
+    -webkit-box-shadow: 1px 5px 15px 5px rgba(0,0,0,0.31); 
+    box-shadow: 1px 5px 15px 5px rgba(0,0,0,0.31);
+    font-size: 1rem;
+  }
+
+  .search-bar input:hover, .search-bar input:focus{
+    transition: ease 0.5s;
+    background-color: white;
+    color: var(--titles);
+  }
+
+  .search-button{
+    border-top-right-radius: 2.5rem;
+    border-bottom-right-radius: 2.5rem;
+    padding: 0.25rem 0rem 0.25rem 0rem;
+    border: none;
+    width: 3rem;
+    font-size: 1.2rem;
+    cursor: pointer;
+    background-color: #ffffff;
+    color: var(--bg-color-primary);
+    margin-right: 1rem;
+  }
+  
+  .search-button:hover {
+    transition: ease 0.3s;
+    background-color: var(--bg-color-primary);
+    color: var(--text);
+  }
+  
+
