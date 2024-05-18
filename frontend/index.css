@@ -103,6 +103,7 @@ nav .changing-heading {
 
 .cards {
   display: flex;
+  flex-direction: row;
   justify-content: center;
   max-width: 70%;
 }
@@ -119,47 +120,32 @@ nav .changing-heading {
 
 }
 
-.card p{
-  margin-top: 1rem;
-  margin-bottom: 0.5rem;
-  font-size: 2rem;
-  -webkit-box-shadow: 0px 2px 5px 4px rgba(0,0,0,0.75);
-  -moz-box-shadow: 0px 2px 5px 4px rgba(0,0,0,0.75);
-  box-shadow: 0px 2px 5px 4px rgba(0,0,0,0.75);
-}
-
   /* card hover overlay */
   .overlay {
     transition: .5s ease;
     position: absolute;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    min-width: 16rem;
-    min-height: 16rem;
-    
-    /*transform: translate(30%, 50%);
-    -ms-transform: translate(30%, 50%);*/
+    transform: translate(30%, 50%);
+    -ms-transform: translate(50%, -50%);
     opacity: 0;
   }
 
-  .overlay button {
-    cursor: pointer;
-    border: none;
-    font-size: 1rem;
-    padding: 0.5rem;
-    width: 8rem;
-  }
-
   .overlay button:first-of-type {
+    cursor: pointer;
     border-radius: 0.25rem;
+    border: none;
+    padding: 0.5rem;
+    font-size: 1rem;
     font-weight: 600;
-    margin-bottom: 1rem
   }
 
   .overlay button:last-of-type {
+    margin-top: 1rem;
+    cursor: pointer;
     border-radius: 0.25rem;
+    border: none;
+    padding: 0.5rem;
     font-size: 1rem;
     font-weight: 600;
   }
