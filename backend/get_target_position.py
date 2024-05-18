@@ -1,23 +1,34 @@
 from skyfield.api import load, wgs84
 import os
 
-sat_name = {}
+sat_names = {}
+planets = 0
 
 def get_file():
     url = 'https://celestrak.org/NORAD/elements/stations.txt'
     all_sat = load.tle_file(url)
-    global sat_name
-    sat_name = {sat.name: sat for sat in all_sat}
+    global sat_names
+    sat_names = {sat.name: sat for sat in all_sat}
+    global planets
+    planets = load('de421.bsp')
 
 def calculate(lat, long, elevation, target) -> tuple:
     time_now = load.timescale().now()
     user_pos = wgs84.latlon(lat, long, elevation_m = elevation)
-    vector_sum = sat_name[target] - user_pos
-    sat_location = vector_sum.at(time_now).altaz()
-    horizontal_angle = sat_location[0].degrees
-    vertical_angle = sat_location[1].degrees
+    if target == "ISS (ZARYA)" or target == "CSS (TIANHE)":
+        vector_sum = sat_names[target] - user_pos
+        sat_location = vector_sum.at(time_now).altaz()
+        horizontal_angle = sat_location[0].degrees
+        vertical_angle = sat_location[1].degrees
+    else: # does NOT work
+        planet = planets[target]
+        planet_location = user_pos.at(time_now).observe(planet)
+        print(planet_location)
     return (horizontal_angle, vertical_angle)
 
 def remove_file():
     if os.path.exists("stations.txt"):
         os.remove("stations.txt")
+
+# get_file()
+# calculate(43.475, -80.529, 338, "mars")
