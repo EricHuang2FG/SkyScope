@@ -40,8 +40,8 @@ function createCard(name, imagePath) {
 }
 
 const cards = [
-  {name: "ISS (ZARYA)", image: "./media/iss.jpeg"},
-  {name: "ISS (NAUKA)", image: "./media/iss_nauka.webp"},
+  {name: "ISS (ZARYA)", image: "./media/iss.png"},
+  // {name: "ISS (NAUKA)", image: "./media/iss_nauka.webp"},
   {name: "CSS (TIANHE)", image: "./media/css.png"},
   {name: "Mercury", image: "./media/mercury.jpeg"},
   {name: "Venus", image: "./media/venus.jpeg"},
