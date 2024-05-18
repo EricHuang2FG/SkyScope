@@ -1,62 +1,16 @@
 const choices = ['Space Stations', 'Planets', 'Even more!', 'Stars'];
+
 let cardsElement = document.querySelector(".cards");
 let index = 0;
-const searchInput = document.getElementById("search-input");
-const searchButton = document.getElementById("search-button");
-let input;
-searchInput.value = "";
 
-const available_names = ["Sun", "The Sun", "Moon", "Mercury", "Venus", "Mars", "Jupiter", "Saturn", "Uranus", "Neptune", "Pluto", "ISS", "International Space Station", "Zarya", "CSS", "Tinahe"];
-const available_objects = [
-  {
-  names: ["Sun", "The Sun"],
-  image: "./media/sun.jpeg"
-  },
-  {
-    names: ["Moon"],
-    image: "./media/moon.jpeg"
-  },
-  {
-    names:["Mercury"],
-    image: "./media/mercury.jpeg"
-  },
-  {
-    names: ["Venus"],
-    image: "./media/venus.jpeg"
-  },
-  {
-    names: ["Mars"],
-    image: "./media/mars.jpeg"
-  },
-  {
-    names:["Jupiter"],
-    image: "./media/jupiter.jpeg"
-  }, 
-  {
-    names: ["Saturn"],
-    image: "./media/saturn.jpeg"
-  },
-  {
-    names: ["Uranus"],
-    image: "./media/uranus.jpeg"
-  },
-  {
-    names: ["Neptune"],
-    image: "./media/neptune.jpeg"
-  },
-  {
-    names: ["Pluto"],
-    image: "./media/pluto.jpeg"
-  },
-  {
-    names: ["ISS", "International Space Station", "Zarya"],
-    image: "./media/iss.jpeg"
-  },
-  {
-    names: ["css", "Tinahe"],
-    image: "./media/css.png"
-  }
-];
+function changeText() {
+  const switchBody = document.querySelector('.switch-body');
+  switchBody.textContent = choices[index];
+  switchBody.className = `switch-body ${choices[index]}`;
+  index = (index + 1) % choices.length;
+}
+
+setInterval(changeText, 2500);
 
 function createCard(name, imagePath) {
   let card = document.createElement("div");
@@ -73,7 +27,7 @@ function createCard(name, imagePath) {
   pElement.textContent = name;
   imgElement.src = `${imagePath}`;
   buttonTrack.classList.add("track");
-  buttonDescription.classList.add("description"); 
+  buttonDescription.classList.add("description");
   overlayDiv.classList.add("overlay");
 
   card.appendChild(imgElement);
@@ -85,28 +39,8 @@ function createCard(name, imagePath) {
   cardsElement.appendChild(card);
 }
 
-function createDefaultCards() {
-  for(let i = 0; i < available_objects.length; i++)
-  {
-    createCard(available_objects[i].names[0], available_objects[i].image);
-  }
-}
-
-
-function changeText() {
-  const switchBody = document.querySelector('.switch-body');
-  switchBody.textContent = choices[index];
-  switchBody.className = `switch-body ${choices[index]}`;
-  index = (index + 1) % choices.length;
-}
-
-setInterval(changeText, 2500);
-
-
-
-/*createCard("Sun", "./media/sun.jpeg");
-createCard("Moon", "./media/moon.jpeg");
 createCard("ISS (ZARYA)", "./media/iss.jpeg");
+createCard("ISS (NAUKA)", "./media/iss_nauka.webp");
 createCard("CSS (TIANHE)", "./media/css.png");
 createCard("Mercury", "./media/mercury.jpeg");
 createCard("Venus", "./media/venus.jpeg");
@@ -115,20 +49,24 @@ createCard("Jupiter", "./media/jupiter.jpeg");
 createCard("Saturn", "./media/saturn.jpeg");
 createCard("Uranus", "./media/uranus.jpeg");
 createCard("Neptune", "./media/neptune.jpeg");
-createCard("Pluto", "./media/pluto.jpeg");*/
+createCard("Pluto", "./media/pluto.jpeg");
+createCard("The Moon", "./media/moon.jpeg");
 
-let trackers = document.getElementsByClassName("track"); 
-
-function getPosition(event) {
-  navigator.geolocation.getCurrentPosition(
-    (position) => {
-      console.log("Latitude:", position.coords.latitude);
-      console.log("Longitude:", position.coords.longitude);
-    },
-    (error) => {
-      console.error("Error getting position:", error);
-    }
-  );
+function getPosition() {
+  return new Promise((resolve, reject) => {
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        resolve({
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude
+        });
+      },
+      (error) => {
+        console.error("Error getting position:", error);
+        reject(error);
+      }
+    );
+  });
 }
 
 function sendPositionToBackend(target, longitude, latitude, elevation) {
@@ -142,89 +80,42 @@ function sendPositionToBackend(target, longitude, latitude, elevation) {
   fetch("http://localhost:8080/skyscope", {
     method: "POST",
     headers: {
-      "Content-Type": "application/json", 
+      "Content-Type": "application/json",
     },
-    body: JSON.stringify(data) 
+    body: JSON.stringify(data)
   })
-    .then(response => {
-      if (!response.ok) {
-        throw new Error("network error saar");
-      }
-      return response.json();
-    })
-    .then(data => {
-      console.log(data);
+  .then(response => {
+    if (!response.ok) {
+      throw new Error("Network error");
+    }
+    return response.json();
+  })
+  .then(data => {
+    console.log(data);
+  })
+  .catch(error => {
+    console.error("Error:", error);
+  });
+}
+
+function gatherData(event) {
+  const card = event.target.closest(".card");
+  const target = card.querySelector("p").textContent;
+  const elevation = 45.72;
+
+  getPosition()
+    .then(position => {
+      const { longitude, latitude } = position;
+      sendPositionToBackend(target, longitude, latitude, elevation);
+      console.log("Successfully Sent information");
+      console.log(target, longitude, latitude, elevation);
     })
     .catch(error => {
-      console.error("Error:", error);
+      console.error("Failed to get position:", error);
     });
 }
 
-document.addEventListener('DOMContentLoaded', (event) => {
-  let trackers = document.getElementsByClassName("track");
-  createDefaultCards();
-  for (let i = 0; i < trackers.length; ++i) {
-    trackers[i].addEventListener("click", getPosition);
-  }
-});
-
-/*  search */
-
-function isObjectFound(name) {
-  for(let i = 0; i < available_objects.length; i++) {
-    if(available_names[i].toLocaleLowerCase() == name.toLowerCase())
-    {
-      return true;
-    }
-  }
-  return false;
+let trackElements = document.getElementsByClassName("track");
+for (let i = 0; i < trackElements.length; ++i) {
+  trackElements[i].addEventListener("click", (event) => gatherData(event));
 }
-
-searchInput.addEventListener('input', (e) => {
-  if(input != "")
-  {
-    input = e.target.value;
-  }
-  else
-  {
-    createDefaultCards();
-  }
-
-})
-
-searchButton.addEventListener('click', (e) => {
-  console.log(1);
-  if(isObjectFound(input))
-  {
-    // delete current shown cards
-    cardsElement.innerHTML = '';
-    // show a card
-    // get input and find a name from associated object that matches it
-    for(let i = 0; i < available_objects.length; i++)
-    {
-      for(let j = 0; j < available_objects[i].names.length; j++)
-      {
-        // if input matches one of the names in the object
-        if(available_objects[i].names[j].toLocaleLowerCase() == input.toLocaleLowerCase())
-        {
-          // create a card 
-          createCard(available_objects[i].names[0], available_objects[i].image);
-        }
-      }
-    }
-    
-  }
-  else
-  {
-    // return object not found
-    // show object not found
-    cardsElement.innerHTML = '';
-    const objectNotFound = document.createElement('h3');
-    objectNotFound.textContent = "Object Not Found. Please try again later."
-    cardsElement.appendChild(objectNotFound);
-  }
-})
-
-
-
-
