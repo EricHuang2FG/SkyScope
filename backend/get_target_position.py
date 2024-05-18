@@ -21,6 +21,8 @@ def calculate(lat, long, elevation, target) -> tuple:
         vertical_angle = sat_location[0].degrees
         horizontal_angle = sat_location[1].degrees
     else:
+        if target != "moon":
+            target += " barycenter"
         planet = planets[target]
         earth = planets['earth']
         user_topocentric_pos = earth + user_pos
@@ -35,4 +37,4 @@ def remove_file():
         os.remove("stations.txt")
 
 # get_file()
-# calculate(43.475, -80.529, 338, "venus")
+# calculate(43.475, -80.529, 338, "jupiter")
