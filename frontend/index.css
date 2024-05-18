@@ -106,6 +106,7 @@ nav .changing-heading {
   flex-direction: row;
   justify-content: center;
   max-width: 70%;
+  flex-wrap: wrap;
 }
 
 .card {
@@ -119,6 +120,7 @@ nav .changing-heading {
   flex-direction: column;
 
 }
+
 
   /* card hover overlay */
   .overlay {
