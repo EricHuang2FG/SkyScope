@@ -101,6 +101,12 @@ nav .changing-heading {
   color: #fff;
 }
 
+.cards-container {
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .cards {
   display: flex;
   flex-direction: row;
@@ -141,7 +147,7 @@ nav .changing-heading {
     position: absolute;
     display: flex;
     flex-direction: column;
-    transform: translate(70%, 80%);
+    transform: translate(70%, 70%);
     -ms-transform: translate(50%, -50%);
     opacity: 0;
     z-index: 1000;
@@ -151,23 +157,29 @@ nav .changing-heading {
     cursor: pointer;
     border: none;
     border-radius: 0.25rem;
-    padding: 0.5rem;
+    padding: 0.75rem;
     font-size: 1rem;
-    font-weight: 600;
+    font-weight: 300;
+    background-color: #22754e;
+    color: white;
+    font-family: sans-serif;
   }
 
   .overlay button:last-of-type {
+    background-color: #1d5ebf;
+    font-family: sans-serif;
     margin-top: 1rem;
     cursor: pointer;
     border-radius: 0.25rem;
     border: none;
-    padding: 0.5rem;
+    padding: 0.75rem;
     font-size: 1rem;
-    font-weight: 600;
+    font-weight: 300;
+    color: white;
   }
 
-  .card:hover image {
-    opacity: 0.3;
+  .card:hover img, .card:hover p{
+    opacity: 0.4;
     cursor: pointer;
   }
 
