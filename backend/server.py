@@ -1,31 +1,29 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
-from serial_communicate import send_angle_to_mc
-import get_target_position as util
-import time
+import get_target_position as gtp
 
 app = Flask(__name__)
 CORS(app)
 
-@app.route("/skyscope", methods=["POST"])
-def receive_info():
+@app.route("/skyscope", methods=["GET", "POST"])
+def main():
     data = request.get_json()
-    if  len(data) == 0:
-        print("Nothing received for the data, exiting...")
-        return jsonify({"error": "An oopsie occurred, no gyatt for you"}), 400
-
-    target = data["target"], latitude = data["latitude"], longitude = data["longitude"], elevation = data["elevation"]
-    util.get_file()
-    print(util.calculate(latitude, longitude, elevation, target))
+    if not data:
+        return jsonify({"message": "bad request, not enough arguments"}), 400
     
-def send_data(target, longitude, latitude, elevation):
-    while True:
-        start_time = time.time()
-        horizontal_angle, vertical_angle = util.calculate(target, longitude, latitude, elevation)
-        send_angle_to_mc(horizontal_angle, vertical_angle)
-        end_time = time.time()
-        difference = 0.25 - (end_time - start_time)
-        if (difference > 0):
-            time.sleep(difference)
+    target = data.get("target")
+    lat = data.get("latitude")
+    long = data.get("longitude")
+    elevation = data.get("elevation")
 
-app.run(debug=True, port=9001)
+    gtp.get_file()
+    if not all([target, lat, long, elevation]):
+        return jsonify({"message": "bad request, missing arguments"}), 400
+    
+    horizontal_angle, vertical_angle = gtp.calculate(target, lat, long, elevation)
+    print(horizontal_angle, vertical_angle)
+
+    return jsonify({"message": "successful", "horizontal_angle": horizontal_angle, "vertical_angle": vertical_angle})
+
+if __name__ == "__main__":
+    app.run(debug=True, port=9001)
