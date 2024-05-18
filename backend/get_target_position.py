@@ -18,12 +18,16 @@ def calculate(lat, long, elevation, target) -> tuple:
     if target == "ISS (ZARYA)" or target == "CSS (TIANHE)":
         vector_sum = sat_names[target] - user_pos
         sat_location = vector_sum.at(time_now).altaz()
-        horizontal_angle = sat_location[0].degrees
-        vertical_angle = sat_location[1].degrees
-    else: # does NOT work
+        vertical_angle = sat_location[0].degrees
+        horizontal_angle = sat_location[1].degrees
+    else:
         planet = planets[target]
-        planet_location = user_pos.at(time_now).observe(planet)
-        print(planet_location)
+        earth = planets['earth']
+        user_topocentric_pos = earth + user_pos
+        planet_location = user_topocentric_pos.at(time_now).observe(planet).apparent().altaz()
+        vertical_angle = planet_location[0].degrees
+        horizontal_angle = planet_location[1].degrees
+    print((horizontal_angle, vertical_angle))
     return (horizontal_angle, vertical_angle)
 
 def remove_file():
@@ -31,4 +35,4 @@ def remove_file():
         os.remove("stations.txt")
 
 # get_file()
-# calculate(43.475, -80.529, 338, "mars")
+# calculate(43.475, -80.529, 338, "venus")
