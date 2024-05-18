@@ -1,4 +1,4 @@
-#!/Users/Main/Development/SkyScope/backend/.venv/bin/python3.12
+#!/Users/rui/Documents/SkyScope/backend/.venv/bin/python3.11
 # -*- coding: utf-8 -*-
 import re
 import sys
