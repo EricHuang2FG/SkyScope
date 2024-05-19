@@ -71,11 +71,11 @@ function getPosition() {
   });
 }
 
-function sendPositionToBackend(target, longitude, latitude, elevation) {
+function sendPositionToBackend(target, latitude, longitude, elevation) {
   let data = {
     "target": target,
-    "longitude": longitude,
     "latitude": latitude,
+    "longitude": longitude,
     "elevation": elevation
   };
 
@@ -103,14 +103,14 @@ function sendPositionToBackend(target, longitude, latitude, elevation) {
 function gatherData(event) {
   const card = event.target.closest(".card");
   const target = card.querySelector("p").textContent;
-  const elevation = 45.72;
+  const elevation = 338;
 
   getPosition()
     .then(position => {
-      const { longitude, latitude } = position;
-      sendPositionToBackend(target, longitude, latitude, elevation);
+      const { latitude, longitude } = position;
+      sendPositionToBackend(target, latitude, longitude, elevation);
       console.log("Successfully Sent information");
-      console.log(target, longitude, latitude, elevation);
+      console.log(target, latitude, longitude, elevation);
     })
     .catch(error => {
       console.error("Failed to get position:", error);
