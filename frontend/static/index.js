@@ -79,7 +79,7 @@ function sendPositionToBackend(target, longitude, latitude, elevation) {
     "elevation": elevation
   };
 
-  fetch("http://localhost:9001/skyscope", {
+  fetch("https://localhost:9001/skyscope", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
