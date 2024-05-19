@@ -5,6 +5,10 @@ sat_names = {}
 planets = 0
 
 def get_file():
+    if os.path.exists("stations.txt"):
+        os.remove("stations.txt")
+    if os.path.exists("de421.bsp"):
+        os.remove("de421.bsp")
     url = 'https://celestrak.org/NORAD/elements/stations.txt'
     all_sat = load.tle_file(url)
     global sat_names
@@ -32,9 +36,9 @@ def calculate(target, lat, long, elevation) -> tuple:
     print((horizontal_angle, vertical_angle))
     return (horizontal_angle, vertical_angle)
 
-def remove_file():
-    if os.path.exists("stations.txt"):
-        os.remove("stations.txt")
+# def remove_file():
+#     if os.path.exists("stations.txt"):
+#         os.remove("stations.txt")
 
 # get_file()
 # calculate(43.475, -80.529, 338, "jupiter")
