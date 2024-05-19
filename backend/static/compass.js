@@ -1,4 +1,3 @@
-let server = `localhost`
 let heading = 0;
 let pitch = 0;
 
@@ -8,8 +7,6 @@ const run = () => {
     compass.addEventListener("reading", function (e) {
       let q = e.target.quaternion;
 
-      console.log(e.target);
-
       heading =
         Math.atan2(
           2 * q[0] * q[1] + 2 * q[2] * q[3],
@@ -17,7 +14,7 @@ const run = () => {
         ) *
         (180 / Math.PI);
 
-        document.innerHTML = heading
+        document.body.innerHTML = heading
     });
 
     compass.start();
@@ -48,8 +45,6 @@ const run = () => {
 };
 
 const setup = async () => {
-  server = prompt("server");
- 
   const permissions = await Promise.all([
     navigator.permissions.query({ name: "accelerometer" }),
     navigator.permissions.query({ name: "magnetometer" }),
@@ -59,14 +54,14 @@ const setup = async () => {
   if (permissions.every((result) => result.state === "granted")) {
     console.log('success')
     run();
-    setInterval(update, 2000);
+    setInterval(update, 100);
   } else {
     console.log("No permissions to use sensors.");
   }
 };
 
 const update = async () => {
-  const request = await fetch(`https://${server}/angles`, {
+  const request = await fetch(`/angles`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
