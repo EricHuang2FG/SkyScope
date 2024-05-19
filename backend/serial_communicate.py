@@ -8,6 +8,7 @@ import serial
 #         print("{}: {} [{}]".format(port, desc, hwid))
 
 def send_angle_to_mc(horizontal_angle, vertical_angle, current_horizontal_angle, current_vertical_angle):
-  ser = serial.Serial("/dev/cu.usbmodem1101")
-  ser.write(f"{horizontal_angle},{vertical_angle},{current_horizontal_angle},${current_vertical_angle}\0".encode())
+  ser = serial.Serial("/dev/cu.usbmodem1101", 9600)
+  ser.write(f"{horizontal_angle}|{vertical_angle}|{current_horizontal_angle}|{current_vertical_angle}\0".encode())
+  print(f"{horizontal_angle}|{vertical_angle}|{current_horizontal_angle}|{current_vertical_angle}\0")
   ser.close()

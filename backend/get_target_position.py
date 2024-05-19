@@ -5,10 +5,10 @@ sat_names = {}
 planets = 0
 
 def get_file():
-    if os.path.exists("stations.txt"):
-        os.remove("stations.txt")
-    if os.path.exists("de421.bsp"):
-        os.remove("de421.bsp")
+    # if os.path.exists("stations.txt"):
+    #     os.remove("stations.txt")
+    # if os.path.exists("de421.bsp"):
+    #     os.remove("de421.bsp")
     url = 'https://celestrak.org/NORAD/elements/stations.txt'
     all_sat = load.tle_file(url)
     global sat_names
@@ -25,7 +25,7 @@ def calculate(target, lat, long, elevation) -> tuple:
         vertical_angle = sat_location[0].degrees
         horizontal_angle = sat_location[1].degrees
     else:
-        if target != "moon":
+        if target.lower() != "moon":
             target += " barycenter"
         planet = planets[target]
         earth = planets['earth']

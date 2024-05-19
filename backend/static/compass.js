@@ -7,8 +7,6 @@ const run = () => {
     compass.addEventListener("reading", function (e) {
       let q = e.target.quaternion;
 
-      console.log(e.target);
-
       heading =
         Math.atan2(
           2 * q[0] * q[1] + 2 * q[2] * q[3],
@@ -16,7 +14,7 @@ const run = () => {
         ) *
         (180 / Math.PI);
 
-        document.innerHTML = heading
+        document.body.innerHTML = heading
     });
 
     compass.start();
@@ -56,7 +54,7 @@ const setup = async () => {
   if (permissions.every((result) => result.state === "granted")) {
     console.log('success')
     run();
-    setInterval(update, 1000);
+    setInterval(update, 100);
   } else {
     console.log("No permissions to use sensors.");
   }

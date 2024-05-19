@@ -76,7 +76,14 @@ def receive_angles():
     if actual_vertical_angle is None or actual_horizontal_angle is None:
         return jsonify({"error": "An oopsie occurred, no gyatt for you"}), 400
 
-    horizontal_angle = ((data.get("horizontal_angle")) % 360)
+    horizontal_angle = ((data.get("horizontal_angle")))
+    if(horizontal_angle <= 0 and horizontal_angle >= -180):
+        horizontal_angle = abs(horizontal_angle)
+    else:
+        horizontal_angle = 360 - horizontal_angle
+
+    horizontal_angle %= 360
+
     vertical_angle = ((data.get("vertical_angle") % 360))
    
     if horizontal_angle is None or vertical_angle is None:
@@ -90,7 +97,7 @@ def receive_angles():
 
         print(f"we are facing: {(horizontal_angle, vertical_angle)}, but we want to face {(azimuth, altitude_deg)}")
         # print((azimuth, altitude_deg))
-        serial_communicate.send_angle_to_mc(azimuth, altitude_deg, horizontal_angle, vertical_angle)
+        serial_communicate.send_angle_to_mc(azimuth, vertical_angle, horizontal_angle, vertical_angle)
     return jsonify({"horizontal_angle": horizontal_angle, "vertical_angle": vertical_angle}), 200
 
 

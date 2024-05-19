@@ -49,7 +49,7 @@ const cards = [
   { name: "Uranus", image: "uranus.jpeg" },
   { name: "Neptune", image: "neptune.jpeg" },
   { name: "Pluto", image: "pluto.jpeg" },
-  { name: "The Moon", image: "moon.jpeg" }
+  { name: "Moon", image: "moon.jpeg" }
 ];
 
 cards.forEach(card => createCard(card.name, card.image));
