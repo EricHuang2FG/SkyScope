@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, render_template, request, jsonify
 from flask_cors import CORS
 import get_target_position as gtp
 
@@ -7,6 +7,10 @@ CORS(app)
 
 actual_horizontal_angle = 0
 actual_vertical_angle = 0
+
+@app.route("/", methods=["GET", "POST"])
+def root():
+    return render_template("index.html")
 
 @app.route("/skyscope", methods=["GET", "POST"])
 def main():
