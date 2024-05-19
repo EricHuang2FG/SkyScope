@@ -1,8 +1,8 @@
 # ---------------------------------------------------------------------------- #
 #                                                                              #
 # 	Module:       main.py                                                      #
-# 	Author:       rui                                                          #
-# 	Created:      5/18/2024, 10:03:54 AM                                       #
+# 	Author:       Tait                                                         #
+# 	Created:      5/18/2024, 12:59:15 AM                                       #
 # 	Description:  V5 project                                                   #
 #                                                                              #
 # ---------------------------------------------------------------------------- #
@@ -11,29 +11,36 @@
 from vex import *
 
 # Brain should be defined by default
-brain = Brain()
+brain=Brain()
 
-horizontal_drive = Motor(Ports.PORT20, GearSetting.RATIO_18_1, True)
-vertical_drive = Motor(Ports.PORT19, GearSetting.RATIO_18_1, True)
+base = Motor(Ports.PORT1, GearSetting.RATIO_18_1, False)
+pitch = Motor(Ports.PORT2, GearSetting.RATIO_18_1, False)
 
-horizontal_drive.set_max_torque(20, PERCENT)
-vertical_drive.set_max_torque(20, PERCENT)
-speed = 1
+base.set_max_torque(25, PERCENT)
+base.set_velocity(3, PERCENT)
 
-def move_motor(enable_horizontal, horizontal_forward, enable_vertical, vertical_forward):
-    if enable_horizontal:
-        if horizontal_forward:
-            horizontal_drive.spin(FORWARD, speed, PERCENT)
-        else:
-            horizontal_drive.spin(REVERSE, speed, PERCENT)
+pitch.set_max_torque(40, PERCENT)
+pitch.set_velocity(2, PERCENT)
+
+az_left = DigitalIn(brain.three_wire_port.g)
+az_right = DigitalIn(brain.three_wire_port.f)
+pt_up = DigitalIn(brain.three_wire_port.e)
+pt_down = DigitalIn(brain.three_wire_port.b)
+
+def loop():
+  while True:
+    if(az_left.value() == 1):
+      base.spin(FORWARD)
+    elif(az_right.value() == 1):
+      base.spin(REVERSE)
     else:
-        horizontal_drive.stop()
-    if enable_vertical:
-        if vertical_forward:
-            vertical_drive.spin(FORWARD, speed, PERCENT)
-        else:
-            vertical_drive.spin(REVERSE, speed, PERCENT)
+      base.stop()
+    
+    if(pt_up.value() == 1):
+      pitch.spin(FORWARD)
+    elif(pt_down.value() == 1):
+      pitch.spin(REVERSE)
     else:
-        horizontal_drive.stop()
+      pitch.stop()
 
-# brain.screen.print("Hello V5")
+task = Thread(loop)
