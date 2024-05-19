@@ -66,7 +66,26 @@ function trackCard(name, imagePath) {
 }
 
 function showDescription(name) {
-  alert(`Showing description for ${name}`);
+  const wikiURLs = {
+    "ISS (ZARYA)": "https://en.wikipedia.org/wiki/Zarya_(ISS_module)",
+    "CSS (TIANHE)": "https://en.wikipedia.org/wiki/Tianhe_core_module",
+    "Mercury": "https://en.wikipedia.org/wiki/Mercury_(planet)",
+    "Venus": "https://en.wikipedia.org/wiki/Venus",
+    "Mars": "https://en.wikipedia.org/wiki/Mars",
+    "Jupiter": "https://en.wikipedia.org/wiki/Jupiter",
+    "Saturn": "https://en.wikipedia.org/wiki/Saturn",
+    "Uranus": "https://en.wikipedia.org/wiki/Uranus",
+    "Neptune": "https://en.wikipedia.org/wiki/Neptune",
+    "Pluto": "https://en.wikipedia.org/wiki/Pluto",
+    "Moon": "https://en.wikipedia.org/wiki/Moon"
+  };
+
+  const url = wikiURLs[name];
+  if (url) {
+    window.location.href = url;
+  } else {
+    alert(`No Wikipedia page found for ${name}`);
+  }
 }
 
 function getPosition() {
