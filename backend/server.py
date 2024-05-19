@@ -5,8 +5,8 @@ import get_target_position as gtp
 app = Flask(__name__)
 CORS(app)
 
-actual_horizontal_angle = 22.9
-actual_vertical_angle = 32.9
+actual_horizontal_angle = 0
+actual_vertical_angle = 0
 
 @app.route("/skyscope", methods=["GET", "POST"])
 def main():
@@ -50,18 +50,22 @@ def receive_angles():
     if actual_vertical_angle is None or actual_horizontal_angle is None:
         return jsonify({"error": "An oopsie occurred, no gyatt for you"}), 400
 
-    horizontal_angle = data.get("horizontal_angle")
-    vertical_angle = data.get("vertical_angle")
+    horizontal_angle = ((data.get("horizontal_angle")) % 360)
+    vertical_angle = ((data.get("vertical_angle") % 360))
    
     if horizontal_angle is None or vertical_angle is None:
         return jsonify({"error": "An oopsie occurred, missing angles"}), 400
 
-    horizontal_answer = actual_horizontal_angle - horizontal_angle
-    vertical_answer = actual_vertical_angle - vertical_angle
+    # horizontal_answer = actual_horizontal_angle - horizontal_angle
+    # vertical_answer = actual_vertical_angle - vertical_angle
 
-    print(horizontal_answer, vertical_answer)
+    if vertical_angle > 180:
+        vertical_angle = -(360 - vertical_angle)
 
-    return jsonify({"horizontal_angle": horizontal_answer, "vertical_angle": vertical_answer}), 200
+    # print(horizontal_answer, vertical_answer)
+    print(horizontal_angle, vertical_angle)
+
+    return jsonify({"horizontal_angle": horizontal_angle, "vertical_angle": vertical_angle}), 200
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", debug=True, port=9001, ssl_context=('cert.pem', 'key.pem'))

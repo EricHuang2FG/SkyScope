@@ -16,6 +16,8 @@ const run = () => {
           1 - 2 * q[1] * q[1] - 2 * q[2] * q[2]
         ) *
         (180 / Math.PI);
+
+        document.innerHTML = heading
     });
 
     compass.start();
@@ -25,20 +27,24 @@ const run = () => {
     alert("not supported");
   }
 
-  if ("Accelerometer" in window) {
-    let accelerometer = new Accelerometer();
-    accelerometer.addEventListener("reading", function (e) {
-      pitch = e.target.y;
+  // if ("Accelerometer" in window) {
+  //   let accelerometer = new Accelerometer();
+  //   accelerometer.addEventListener("reading", function (e) {
+  //     pitch = e.target.y;
 
-      document.innerHTML = pitch;
-    });
+  //     document.innerHTML = pitch;
+  //   });
 
-    accelerometer.start();
+  //   accelerometer.start();
 
-    console.log("accelerometer created");
-  } else {
-    alert("not supported");
-  }
+  //   console.log("accelerometer created");
+  // } else {
+  //   alert("not supported");
+  // }
+
+  window.addEventListener("deviceorientation", (event) => {
+    pitch = event.beta
+  }, true)
 };
 
 const setup = async () => {
@@ -53,7 +59,7 @@ const setup = async () => {
   if (permissions.every((result) => result.state === "granted")) {
     console.log('success')
     run();
-    setInterval(update, 250);
+    setInterval(update, 2000);
   } else {
     console.log("No permissions to use sensors.");
   }
@@ -65,7 +71,7 @@ const update = async () => {
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({horizontal_angle: heading, vertical_angle: pitch})
+    body: JSON.stringify({"horizontal_angle": heading, "vertical_angle": pitch})
   })
  
   const response = await request.json()
