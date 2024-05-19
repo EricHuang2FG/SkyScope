@@ -25,7 +25,7 @@ function createCard(name, imagePath) {
 
   card.classList.add("card");
   pElement.textContent = name;
-  imgElement.src = `${imagePath}`;
+  imgElement.src = `${staticBaseURL}${imagePath}`; 
   buttonTrack.classList.add("track");
   buttonDescription.classList.add("description");
   overlayDiv.classList.add("overlay");
@@ -35,23 +35,21 @@ function createCard(name, imagePath) {
   overlayDiv.appendChild(buttonTrack);
   overlayDiv.appendChild(buttonDescription);
   card.appendChild(overlayDiv);
-
   cardsElement.appendChild(card);
 }
 
 const cards = [
-  {name: "ISS (ZARYA)", image: "./media/iss.png"},
-  // {name: "ISS (NAUKA)", image: "./media/iss_nauka.webp"},
-  {name: "CSS (TIANHE)", image: "./media/css.png"},
-  {name: "Mercury", image: "./media/mercury.jpeg"},
-  {name: "Venus", image: "./media/venus.jpeg"},
-  {name: "Mars", image: "./media/mars.jpeg"},
-  {name: "Jupiter", image: "./media/jupiter.jpeg"},
-  {name: "Saturn", image: "./media/saturn.jpeg"},
-  {name: "Uranus", image: "./media/uranus.jpeg"},
-  {name: "Neptune", image: "./media/neptune.jpeg"},
-  {name: "Pluto", image: "./media/pluto.jpeg"},
-  {name: "The Moon", image: "./media/moon.jpeg"}
+  { name: "ISS (ZARYA)", image: "iss.png" },
+  { name: "CSS (TIANHE)", image: "css.png" },
+  { name: "Mercury", image: "mercury.jpeg" },
+  { name: "Venus", image: "venus.jpeg" },
+  { name: "Mars", image: "mars.jpeg" },
+  { name: "Jupiter", image: "jupiter.jpeg" },
+  { name: "Saturn", image: "saturn.jpeg" },
+  { name: "Uranus", image: "uranus.jpeg" },
+  { name: "Neptune", image: "neptune.jpeg" },
+  { name: "Pluto", image: "pluto.jpeg" },
+  { name: "The Moon", image: "moon.jpeg" }
 ];
 
 cards.forEach(card => createCard(card.name, card.image));
