@@ -70,6 +70,7 @@ def main():
 def stop_track():
     global track
     track = False
+    serial_communicate.send_angle_to_mc(0, 0, 0, 0)
     return jsonify({"message": "yay, success!"}), 200
 
 @app.route("/angles", methods=["POST"])
