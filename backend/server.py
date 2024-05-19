@@ -95,9 +95,9 @@ def receive_angles():
     if track:
         azimuth, altitude_deg = gtp.calculate(target, lat, long, elevation)
 
-        print(f"we are facing: {(horizontal_angle, vertical_angle)}, but we want to face {(azimuth, altitude_deg)}")
+        # print(f"we are facing: {(horizontal_angle, vertical_angle)}, but we want to face {(azimuth, altitude_deg)}")
         # print((azimuth, altitude_deg))
-        serial_communicate.send_angle_to_mc(azimuth, vertical_angle, horizontal_angle, vertical_angle)
+        serial_communicate.send_angle_to_mc(azimuth, altitude_deg, horizontal_angle, vertical_angle)
     return jsonify({"horizontal_angle": horizontal_angle, "vertical_angle": vertical_angle}), 200
 
 
