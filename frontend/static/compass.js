@@ -59,7 +59,7 @@ const setup = async () => {
   if (permissions.every((result) => result.state === "granted")) {
     console.log('success')
     run();
-    setInterval(update, 2000);
+    setInterval(update, 250);
   } else {
     console.log("No permissions to use sensors.");
   }
