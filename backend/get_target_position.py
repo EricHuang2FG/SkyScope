@@ -33,7 +33,6 @@ def calculate(target, lat, long, elevation) -> tuple:
         planet_location = user_topocentric_pos.at(time_now).observe(planet).apparent().altaz()
         vertical_angle = planet_location[0].degrees
         horizontal_angle = planet_location[1].degrees
-    print((horizontal_angle, vertical_angle))
     return (horizontal_angle, vertical_angle)
 
 # def remove_file():

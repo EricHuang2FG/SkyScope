@@ -1,4 +1,3 @@
-let server = `localhost`
 let heading = 0;
 let pitch = 0;
 
@@ -48,8 +47,6 @@ const run = () => {
 };
 
 const setup = async () => {
-  server = prompt("server");
- 
   const permissions = await Promise.all([
     navigator.permissions.query({ name: "accelerometer" }),
     navigator.permissions.query({ name: "magnetometer" }),
@@ -59,14 +56,14 @@ const setup = async () => {
   if (permissions.every((result) => result.state === "granted")) {
     console.log('success')
     run();
-    setInterval(update, 2000);
+    setInterval(update, 1000);
   } else {
     console.log("No permissions to use sensors.");
   }
 };
 
 const update = async () => {
-  const request = await fetch(`https://${server}/angles`, {
+  const request = await fetch(`/angles`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
