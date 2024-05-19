@@ -37,8 +37,8 @@ function createCard(name, imagePath) {
   card.appendChild(overlayDiv);
   cardsElement.appendChild(card);
 
-  buttonTrack.addEventListener("click", (event) => trackCard(event, name, imagePath));
-  buttonDescription.addEventListener("click", (event) => showDescription(event, name));
+  // buttonTrack.addEventListener("click", (event) => trackCard(name, imagePath));
+  buttonDescription.addEventListener("click", (event) => showDescription(name));
 }
 
 const cards = [
@@ -57,7 +57,7 @@ const cards = [
 
 cards.forEach(card => createCard(card.name, card.image));
 
-function trackCard(event, name, imagePath) {
+function trackCard(name, imagePath) {
   const url = new URL(window.location.href);
   url.pathname = '/results';
   url.searchParams.set('name', name);
@@ -65,7 +65,7 @@ function trackCard(event, name, imagePath) {
   window.location.href = url.toString();
 }
 
-function showDescription(event, name) {
+function showDescription(name) {
   alert(`Showing description for ${name}`);
 }
 
@@ -87,32 +87,37 @@ function getPosition() {
 }
 
 function sendPositionToBackend(target, latitude, longitude, elevation) {
-  let data = {
-    "target": target,
-    "latitude": latitude,
-    "longitude": longitude,
-    "elevation": elevation
-  };
-
-  fetch("https://localhost:9001/skyscope", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(data)
+  return new Promise((resolve, reject) => {
+    let data = {
+      "target": target,
+      "latitude": latitude,
+      "longitude": longitude,
+      "elevation": elevation
+    };
+  
+    fetch("https://localhost:9001/skyscope", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data)
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error("Network error");
+      }
+      return response.json();
+    })
+    .then(data => {
+      console.log(data);
+      resolve(data)
+    })
+    .catch(error => {
+      console.error("Error:", error);
+      reject(error)
+    });
   })
-  .then(response => {
-    if (!response.ok) {
-      throw new Error("Network error");
-    }
-    return response.json();
-  })
-  .then(data => {
-    console.log(data);
-  })
-  .catch(error => {
-    console.error("Error:", error);
-  });
+  
 }
 
 function gatherData(event) {
@@ -120,12 +125,28 @@ function gatherData(event) {
   const target = card.querySelector("p").textContent;
   const elevation = 338;
 
+  document.getElementById("loading").style.display = "block"
+
   getPosition()
     .then(position => {
       const { latitude, longitude } = position;
-      sendPositionToBackend(target, latitude, longitude, elevation);
+      return sendPositionToBackend(target, latitude, longitude, elevation);
+    }).then(data => {
       console.log("Successfully Sent information");
-      console.log(target, latitude, longitude, elevation);
+      console.log(target);
+
+      let image = ''
+
+      for(const object of cards) {
+        if(object.name == target) {
+          image = object.image
+          break;
+        }
+      }
+
+      console.log(`track ${target} ${image}`)
+
+      trackCard(target, image)
     })
     .catch(error => {
       console.error("Failed to get position:", error);

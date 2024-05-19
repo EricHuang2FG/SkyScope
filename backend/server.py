@@ -66,6 +66,12 @@ def main():
     #     horizontal_angle, vertical_angle = gtp.calculate(target, lat, long, elevation)
     #     return jsonify({"coordinates": [horizontal_angle, vertical_angle]}), 200
 
+@app.route("/stop", methods=["POST"])
+def stop_track():
+    global track
+    track = False
+    return jsonify({"message": "yay, success!"}), 200
+
 @app.route("/angles", methods=["POST"])
 def receive_angles():
     data = request.get_json()
@@ -94,6 +100,7 @@ def receive_angles():
 
     if track:
         azimuth, altitude_deg = gtp.calculate(target, lat, long, elevation)
+        print("tracking!")
 
         # print(f"we are facing: {(horizontal_angle, vertical_angle)}, but we want to face {(azimuth, altitude_deg)}")
         # print((azimuth, altitude_deg))
