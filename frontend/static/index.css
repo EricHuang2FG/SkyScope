@@ -64,21 +64,6 @@ nav .changing-heading {
   font-family: 'Arial', sans-serif;
 }
 
-#searching-box input {
-  height: 2.8rem;
-  min-width: 85%;
-  padding: 0.5rem 1rem;
-  margin: 1.2em 0em;
-  border-top-left-radius: 2.5rem;
-  border-bottom-left-radius: 2.5rem;
-  border: none;
-  color: #000;
-  background-color: #fff;
-  -webkit-box-shadow: 1px 5px 15px 5px rgba(0,0,0,0.31); 
-  box-shadow: 1px 5px 15px 5px rgba(0,0,0,0.31);
-  font-size: 1rem;
-}
-
 #searching-box {
   display: flex;
   min-width: 44rem;
@@ -87,17 +72,31 @@ nav .changing-heading {
   z-index: 1000;
 }
 
-#searching-box button {
-  border-top-right-radius: 2.5rem;
-  height: 4rem;
-  border-bottom-right-radius: 2.5rem;
+#searching-box input {
+  height: 2.8rem;
+  width: 95%; /* Adjusted width */
+  padding: 0.5rem 1rem;
+  margin: 1.2em 0em;
+  border-radius: 2.5rem; /* Rounded corners on both sides */
   border: none;
-  width: 3rem;
+  color: #000;
+  background-color: #fff;
+  -webkit-box-shadow: 1px 5px 15px 5px rgba(0,0,0,0.31); 
+  box-shadow: 1px 5px 15px 5px rgba(0,0,0,0.31);
+  font-size: 1rem;
+}
+
+#searching-box button {
+  border-radius: 2.5rem; /* Rounded corners on both sides */
+  height: 2.8rem;
+  border: none;
+  width: 20%; /* Adjusted width */
   font-size: 1.2rem;
   cursor: pointer;
   background-color: #3b3b3b;
   color: #fff;
 }
+
 
 .cards-container {
   display: flex;
@@ -138,19 +137,18 @@ nav .changing-heading {
   text-align: center;
 }
 
-/* Card hover overlay */
 .overlay {
   transition: .5s ease;
   position: absolute;
   display: flex;
   flex-direction: column;
-  top: 0; /* Add this line */
-  left: 0; /* Add this line */
-  right: 0; /* Add this line */
-  bottom: 0; /* Add this line */
-  align-items: center; /* Center buttons horizontally */
-  justify-content: center; /* Center buttons vertically */
-  background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent background */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  align-items: center; 
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.7);
   opacity: 0;
 }
 
@@ -191,6 +189,35 @@ nav .changing-heading {
   #searching-box input {
     min-width: 20rem;
   }
+}
+
+.button {
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.button:hover {
+  background-color: darken(#c31d39, 10%);
+  transform: scale(1.05);
+}
+
+.button:active {
+  transform: scale(0.95);
+}
+
+#stop-tracking {
+  background-color: #c31d39;
+}
+
+#stop-tracking:hover {
+  background-color: #a51a32;
+}
+
+#track-new {
+  background-color: #6fd547;
+}
+
+#track-new:hover {
+  background-color: #5cb73d;
 }
 
 /* stars animation */

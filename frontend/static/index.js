@@ -36,6 +36,9 @@ function createCard(name, imagePath) {
   overlayDiv.appendChild(buttonDescription);
   card.appendChild(overlayDiv);
   cardsElement.appendChild(card);
+
+  buttonTrack.addEventListener("click", (event) => trackCard(event, name, imagePath));
+  buttonDescription.addEventListener("click", (event) => showDescription(event, name));
 }
 
 const cards = [
@@ -54,6 +57,18 @@ const cards = [
 
 cards.forEach(card => createCard(card.name, card.image));
 
+function trackCard(event, name, imagePath) {
+  const url = new URL(window.location.href);
+  url.pathname = '/results';
+  url.searchParams.set('name', name);
+  url.searchParams.set('image', imagePath);
+  window.location.href = url.toString();
+}
+
+function showDescription(event, name) {
+  alert(`Showing description for ${name}`);
+}
+
 function getPosition() {
   return new Promise((resolve, reject) => {
     navigator.geolocation.getCurrentPosition(
@@ -71,11 +86,11 @@ function getPosition() {
   });
 }
 
-function sendPositionToBackend(target, latitude, longitude, elevation) {
+function sendPositionToBackend(target, longitude, latitude, elevation) {
   let data = {
     "target": target,
-    "latitude": latitude,
     "longitude": longitude,
+    "latitude": latitude,
     "elevation": elevation
   };
 
@@ -103,14 +118,14 @@ function sendPositionToBackend(target, latitude, longitude, elevation) {
 function gatherData(event) {
   const card = event.target.closest(".card");
   const target = card.querySelector("p").textContent;
-  const elevation = 338;
+  const elevation = 45.72;
 
   getPosition()
     .then(position => {
-      const { latitude, longitude } = position;
-      sendPositionToBackend(target, latitude, longitude, elevation);
+      const { longitude, latitude } = position;
+      sendPositionToBackend(target, longitude, latitude, elevation);
       console.log("Successfully Sent information");
-      console.log(target, latitude, longitude, elevation);
+      console.log(target, longitude, latitude, elevation);
     })
     .catch(error => {
       console.error("Failed to get position:", error);
@@ -121,3 +136,18 @@ let trackElements = document.getElementsByClassName("track");
 for (let i = 0; i < trackElements.length; ++i) {
   trackElements[i].addEventListener("click", (event) => gatherData(event));
 }
+
+const searchInput = document.getElementById("search-input");
+searchInput.addEventListener("input", () => {
+  const searchTerm = searchInput.value.trim().toLowerCase();
+  const cardElements = document.querySelectorAll(".card");
+  
+  cardElements.forEach(card => {
+    const cardName = card.querySelector("p").textContent.toLowerCase();
+    if (cardName.includes(searchTerm)) {
+      card.style.display = "flex";
+    } else {
+      card.style.display = "none";
+    }
+  });
+});
